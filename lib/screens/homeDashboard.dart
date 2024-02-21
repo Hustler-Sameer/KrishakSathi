@@ -246,13 +246,23 @@
 
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class homeDashBoard extends StatelessWidget {
+class homeDashBoard extends StatefulWidget {
+  @override
+  State<homeDashBoard> createState() => _homeDashBoardState();
+}
+
+class _homeDashBoardState extends State<homeDashBoard> {
+  int currentIndex = 0;
+  final CarouselController carouselController = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     double widthAllowed = MediaQuery.of(context).size.width;
     return Scaffold(
+      // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       drawer: SafeArea(
         child: Drawer(
           child: ListView(
@@ -392,197 +402,259 @@ class homeDashBoard extends StatelessWidget {
               icon: Icon(Icons.notification_add_outlined)),
         ],
       ),
-      body: Stack(children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 25, 15, 15),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
-            ),
-            width: widthAllowed,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // const Text('Ganpati Bappa Morya'),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(35, 0, 20, 0),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            height: 100.0,
-                            width: 100.0,
-                            child: FittedBox(
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                child: Image.asset(
-                                  'lib/assets/harvesting.png',
-                                  color: Colors.white,
-                                  height: 35,
-                                ),
-                                backgroundColor: Color(0xFF700C79),
-                                elevation: 20,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Text("Crop Cutting \n Experiment"),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 95,
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            height: 100.0,
-                            width: 100.0,
-                            child: FittedBox(
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.monitor_heart,
-                                  color: Colors.white,
-                                  size: 35,
-                                ),
-                                backgroundColor: Color(0xFF700C79),
-                                elevation: 20,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Text("Crop Health \n Monitoring"),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                // 2nd row
-                Padding(
-                  padding: EdgeInsets.fromLTRB(35, 35, 20, 0),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            height: 100.0,
-                            width: 100.0,
-                            child: FittedBox(
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.satellite_alt_outlined,
-                                  color: Colors.white,
-                                  size: 35,
-                                ),
-                                backgroundColor: Color(0xFF700C79),
-                                elevation: 20,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          // const SizedBox(
-                          //   width: 10,
-                          // ),
-                          Text("    Automatic \nWeather Stations"),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 95,
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            height: 100.0,
-                            width: 100.0,
-                            child: FittedBox(
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.list_alt_outlined,
-                                  color: Colors.white,
-                                  size: 35,
-                                ),
-                                backgroundColor: Color(0xFF700C79),
-                                elevation: 20,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          const Text("Survey Report \n      "),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                // 3rd row
-
-                Padding(
-                  padding: EdgeInsets.fromLTRB(35, 35, 20, 0),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            height: 100.0,
-                            width: 100.0,
-                            child: FittedBox(
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.groups_2,
-                                  color: Colors.white,
-                                  size: 35,
-                                ),
-                                backgroundColor: Color(0xFF700C79),
-                                elevation: 20,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Text("    Employee \n Engagement"),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
+      body: SingleChildScrollView(
+        child: Stack(children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 25, 15, 15),
             child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(color: Colors.transparent),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 255, 255, 255),
+              ),
+              width: widthAllowed,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  FloatingActionButton(
-                      onPressed: () => print('hehe'),
-                      child: Icon(Icons.cloud_download_outlined)),
-                  Text("Data Download Sync")
+                  // const Text('Ganpati Bappa Morya'),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                    child: InkWell(
+                      onTap: () {
+                        print(currentIndex);
+                      },
+                      child: CarouselSlider(
+                          items: [
+                            Container(
+                              height: 15,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: const DecorationImage(
+                                      image:
+                                          AssetImage("lib/assets/pmfsby.jpg"),
+                                      fit: BoxFit.fill)),
+                            ),
+                            Container(
+                              height: 15,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: const DecorationImage(
+                                      image: AssetImage(
+                                          "lib/assets/PMFBYbanner01.jpeg"),
+                                      fit: BoxFit.fill)),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            // Container(
+                            //   height: 15,
+                            //   alignment: Alignment.center,
+                            //   decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(15),
+                            //       image: const DecorationImage(
+                            //           image: AssetImage(
+                            //               "assets/images/snacks_2.JPG"),
+                            //           fit: BoxFit.fill)),
+                            // )
+                          ],
+                          carouselController: carouselController,
+                          options: CarouselOptions(
+                            scrollPhysics: const BouncingScrollPhysics(),
+                            autoPlay: true,
+                            aspectRatio: 2.5,
+                            viewportFraction: 1,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                currentIndex = index;
+                              });
+                            },
+                          )),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(35, 0, 20, 0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            // Text('Ganpati Bappa Morya'),
+                            Container(
+                              height: 100.0,
+                              width: 100.0,
+                              child: FittedBox(
+                                child: FloatingActionButton(
+                                  onPressed: () {},
+                                  child: Image.asset(
+                                    'lib/assets/harvesting.png',
+                                    color: Colors.white,
+                                    height: 35,
+                                  ),
+                                  backgroundColor: Color(0xFF700C79),
+                                  elevation: 20,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Text("Crop Cutting \n Experiment"),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 95,
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              height: 100.0,
+                              width: 100.0,
+                              child: FittedBox(
+                                child: FloatingActionButton(
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.monitor_heart,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                  backgroundColor: Color(0xFF700C79),
+                                  elevation: 20,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Text("Crop Health \n Monitoring"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  // 2nd row
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(35, 35, 20, 0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 100.0,
+                              width: 100.0,
+                              child: FittedBox(
+                                child: FloatingActionButton(
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.satellite_alt_outlined,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                  backgroundColor: Color(0xFF700C79),
+                                  elevation: 20,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            // const SizedBox(
+                            //   width: 10,
+                            // ),
+                            Text("    Automatic \nWeather Stations"),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 95,
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              height: 100.0,
+                              width: 100.0,
+                              child: FittedBox(
+                                child: FloatingActionButton(
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.list_alt_outlined,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                  backgroundColor: Color(0xFF700C79),
+                                  elevation: 20,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            const Text("Survey Report \n      "),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // 3rd row
+
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(35, 35, 20, 0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 100.0,
+                              width: 100.0,
+                              child: FittedBox(
+                                child: FloatingActionButton(
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.groups_2,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                  backgroundColor: Color(0xFF700C79),
+                                  elevation: 20,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Text("    Employee \n Engagement"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ))
-      ]),
+            ),
+          ),
+          // Positioned(
+          //     bottom: 0,
+          //     left: 0,
+          //     right: 0,
+          //     child: Container(
+          //       width: MediaQuery.of(context).size.width,
+          //       height: MediaQuery.of(context).size.height,
+          //       decoration: BoxDecoration(color: Colors.transparent),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         crossAxisAlignment: CrossAxisAlignment.end,
+          //         children: [
+          //           FloatingActionButton(
+          //               onPressed: () => print('hehe'),
+          //               child: Icon(Icons.cloud_download_outlined)),
+          //           Text("Data Download Sync")
+          //         ],
+          //       ),
+          //     ))
+        ]),
+      ),
       // bottomNavigationBar: BottomNavigationBar(
       //   type: BottomNavigationBarType.fixed,
       //   backgroundColor: Color(0xFF610361),
