@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:krishaksarthiuat/screens/cropcuttingdashboard.dart';
+import 'package:krishaksarthiuat/screens/form.dart';
 
 class homeDashBoard1 extends StatefulWidget {
   @override
@@ -226,8 +227,9 @@ class _homeDashBoard1State extends State<homeDashBoard1> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CCEDashBoard(),
-                            ),
+                                builder: (context) => MyCustomForm()
+                                // CCEDashBoard(),
+                                ),
                           );
                         },
                         style: ElevatedButton.styleFrom(

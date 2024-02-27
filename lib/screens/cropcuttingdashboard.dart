@@ -150,6 +150,9 @@ class _CCEDashboard extends State<CCEDashBoard> {
               icon: Icon(Icons.notification_add_outlined)),
         ],
       ),
+      body: Container(
+        child: Padding(padding: EdgeInsets.all(10), child: Column()),
+      ),
     );
   }
 }
